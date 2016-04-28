@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Control Center</title>
+
+
+    <script src="vue.js"></script>
+    <script src="scripts/ocanvas-2.8.4.js" type="text/javascript"></script>
+    <script src="scripts/server.js" type="text/javascript"></script>
+    <script>
+      function init() {
+        var canvas = oCanvas.create({
+          canvas: "#mainscreen",
+          background: "#222",
+          fps: 30
+        });
+        
+        pw_server=new Server();
+        
+        
+        var plane = canvas.display.ellipse({
+          x:50,
+          y:90,
+          radius: 30,
+          stroke: "1px #107B99",
+          strokeColor: "#107B99",
+        }).add();
+        var scale = 1;
+        
+        plane.dragAndDrop();
+        var mycanvas = document.getElementById("mainscreen");
+        // IE9, Chrome, Safari, Opera
+        mycanvas.addEventListener("mousewheel", MouseWheelHandler, false);
+        // Firefox
+        mycanvas.addEventListener("DOMMouseScroll", MouseWheelHandler, false);
+        
+        function MouseWheelHandler(ev) {
+          var delta = Math.max(-1, Math.min(1, (ev.wheelDelta || -ev.detail)));
+          scale = scale * (1 + delta/10);
+          plane.scale(scale, scale);
+          canvas.redraw();
+        }
+        
+        
+        var object = canvas.display.ellipse({
+          x:10,
+          y:20,
+          radius: 30,
+          stroke: "1px #107B99",
+          strokeColor: "#107B99",
+        });
+        
+        plane.addChild(object)
+        
+        
+        
+        
+      }
+    </script>
+  </head>
+
+  <body onload="init()">
+    <div id="app">
+    <canvas id="mainscreen" width=400 height=200></canvas>
+    </div>
+  </body>
+</html>
