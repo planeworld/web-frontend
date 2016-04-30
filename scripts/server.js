@@ -1,7 +1,7 @@
  
 data = {}
 data.objects= {
-  "1" : {
+  o1 : {
     name : "Sun",
     shape : [
       {
@@ -11,7 +11,7 @@ data.objects= {
     ],
   },
 
-  "2" : {
+  o2 : {
     name : "Earth",
     shape : [
       {
@@ -21,7 +21,7 @@ data.objects= {
     ],
   },
 
-  "3" : {
+  o3 : {
     name : "Box",
     shape : [
       {
@@ -46,7 +46,7 @@ var Server = function() {
 };
 
 Server.prototype.getObject = function(id){
-  return this.data[id];
+  return this.data.objects[id];
 }
 
 Server.prototype.getStates = function(){
