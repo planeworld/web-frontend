@@ -57,8 +57,8 @@ Server.prototype.getStates = function(){
     {
       id: "o2",
       position : {
-        x : delta_t / 100,
-        y : 30
+        x : Math.sin(delta_t / 1000)* 200,
+        y : Math.cos(delta_t / 1000)* 200
       },
       rotation : 0
     },
