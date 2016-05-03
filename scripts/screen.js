@@ -34,14 +34,19 @@ var Screen = function(id) {
   
 };
  
-Screen.prototype.addObject = function(data){
-  return this.data[id];
+Screen.prototype.addObject = function(object){
+  this.plane.addChild(object.shape);
 }
+
+Screen.prototype.setLoop = function(func_var){
+  this.canvas.setLoop(func_var).start();
+}
+
 
 var VisualObject = function() {
 }
 
-VisualObject.create=function(data, canvas, parent) {
+VisualObject.create=function(data, canvas) {
   var object= new VisualObject();
   object.name=data.name;
   
@@ -51,8 +56,28 @@ VisualObject.create=function(data, canvas, parent) {
       stroke: "1px #107B99",
     });
   }
-  
-  parent.addChild(object.shape);
-  
+  else if (data.shape[0].type=="rectangle") {
+    object.shape =canvas.display.rectangle({
+      width: 200,
+      height: 200,
+    }); 
+    
+    object.shape.addChild(canvas.display.rectangle({
+      x : -data.shape[0].width/2,
+      y : -data.shape[0].height/2,
+      width: data.shape[0].width,
+      height: data.shape[0].height,
+      stroke: "1px #F07B00",
+    }));
+  } 
+  object.shape.drawn=false;
   return object;
+}
+
+VisualObject.prototype.setPosition = function(position) {
+  this.shape.moveTo(position.x, position.y);
+}
+
+VisualObject.prototype.setRotation = function(rotation) {
+  this.shape.rotateTo(rotation);
 }

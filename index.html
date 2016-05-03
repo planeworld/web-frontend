@@ -11,16 +11,45 @@
     <script src="scripts/server.js" type="text/javascript"></script>
     <script src="scripts/screen.js" type="text/javascript"></script>
     <script>
+      var objects={};
+      var stateOld;
+      var stateNew;
+      var screen;
+      var pw_server;
+    
       function init() {
-        var screen = new Screen("mainscreen");
+        screen = new Screen("mainscreen");
         
         pw_server=new Server();
         var object=VisualObject.create(pw_server.getObject("o1"), screen.canvas, screen.plane);
 
-        //screen.addObject(object);
-        
-        
+        screen.setLoop(theLoop);
       }
+      
+      function getState(){
+        var states= pw_server.getStates();
+        for (i=0; i<states.length; i++) {
+          if (!objects.hasOwnProperty(states[i].id)) {
+            objects[states[i].id]=VisualObject.create(pw_server.getObject(states[i].id), screen.canvas);
+            screen.addObject(objects[states[i].id])
+          }
+        }
+        return states;
+      }
+      
+      function setState(states){
+        for (i=0; i<states.length; i++) {
+          objects[states[i].id].setPosition(states[i].position);
+          objects[states[i].id].setRotation(states[i].rotation);
+        }
+      }
+      
+      function theLoop(){
+        var state=getState()
+        setState(state);
+      }
+      
+      
     </script>
   </head>
 

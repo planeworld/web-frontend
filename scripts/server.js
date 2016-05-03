@@ -26,14 +26,8 @@ data.objects= {
     shape : [
       {
         type : "rectangle",
-        corner1 : {
-          x : -5,
-          y : -5
-        },
-        corner2 : {
-          x : 5,
-          y : 5
-        },
+        width : 10,
+        height : 30,
       },
     ],
   },
@@ -53,7 +47,7 @@ Server.prototype.getStates = function(){
   var delta_t = Date.now() - this.timestamp;
   return [
     {
-      id: "1",
+      id: "o1",
       position : {
         x : 0,
         y : 0
@@ -61,7 +55,7 @@ Server.prototype.getStates = function(){
       rotation : 0
     },
     {
-      id: "2",
+      id: "o2",
       position : {
         x : 0,
         y : 30
@@ -69,10 +63,10 @@ Server.prototype.getStates = function(){
       rotation : 0
     },
     {
-      id: "3",
+      id: "o3",
       position : {
-        x : 0,
-        y : delta_t / 1000
+        x : 50,
+        y : delta_t / 100
       },
       rotation : delta_t / 1000 / 2 / Math.pi
     },
