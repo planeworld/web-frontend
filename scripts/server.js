@@ -57,7 +57,7 @@ Server.prototype.getStates = function(){
     {
       id: "o2",
       position : {
-        x : 0,
+        x : delta_t / 100,
         y : 30
       },
       rotation : 0
@@ -66,9 +66,9 @@ Server.prototype.getStates = function(){
       id: "o3",
       position : {
         x : 50,
-        y : delta_t / 100
+        y : 50
       },
-      rotation : delta_t / 1000 / 2 / Math.pi
+      rotation : 2 * Math.PI * delta_t / 100
     },
   ];
 }
